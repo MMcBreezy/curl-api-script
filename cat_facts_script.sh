@@ -1,13 +1,44 @@
 #!/bin/bash
 
 API_URL="https://catfact.ninja/fact"
-
 OUTPUT_FILE="Random_Cat_Facts.txt"
 
-echo -e "\n--- $(date) ---\n" >> "$OUTPUT_FILE"
+clear_file() {
+    > "$OUTPUT_FILE"
+    echo "File cleared."
+}
 
-curl -s "$API_URL" >> "$OUTPUT_FILE"
+while [[ $# -gt 0 ]]; do
+    key="$1"
+    case $key in
+        -n|--number)
+        FACTS_COUNT="$2"
+        shift
+        shift
+        ;;
+        -h|--help)
+        echo "Usage: $0 [-n|--number NUMBER] [-c|--clear] [--help]"
+        exit 0
+        ;;
+        -c|--clear)
+        clear_file
+        exit 0
+        ;;
+        *)
+        echo "Unknown option: $1"
+        echo "Usage: $0 [-n|--number NUMBER] [-c|--clear] [--help]"
+        exit 1
+        ;;
+    esac
+done
 
-echo ""API response saved to $OUTPUT_FILE""
+date=$(date "+%Y-%m-%d %H:%M:%S")
 
-#Running "./cat_facts_script.sh" will call the catfact API and store the response in the Random_Cat_Facts.txt file.
+for ((i = 0; i < FACTS_COUNT; i++)); do
+    fact=$(curl -s "$API_URL" | jq -r '.fact')
+    echo -e "\n--- Fact $((i + 1)) ---\nDate Added: $date\n$fact\n" >> "$OUTPUT_FILE"
+done
+
+echo "$FACTS_COUNT cat facts appended to $OUTPUT_FILE"
+
+# Running "./cat_facts_script.sh" will call the catfact API and store the response in the Random_Cat_Facts.txt file.
