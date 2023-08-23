@@ -3,6 +3,8 @@
 API_URL="https://catfact.ninja/fact"
 OUTPUT_FILE="Random_Cat_Facts.txt"
 
+DEFAULT_FACTS_COUNT=1
+
 clear_file() {
     > "$OUTPUT_FILE"
     echo "File cleared."
@@ -33,6 +35,10 @@ while [[ $# -gt 0 ]]; do
         ;;
     esac
 done
+
+if [ -z "$FACTS_COUNT" ]; then
+    FACTS_COUNT=$DEFAULT_FACTS_COUNT
+fi
 
 date=$(date "+%Y-%m-%d %H:%M:%S")
 
