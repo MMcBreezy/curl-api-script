@@ -10,4 +10,4 @@ curl -s "$API_URL" >> "$OUTPUT_FILE"
 
 echo ""API response saved to $OUTPUT_FILE""
 
-#Running "./cat_facts_scripts.sh" will call the catfact API and store the response in the Random_Cat_Facts.txt file.
+#Running "./cat_facts_script.sh" will call the catfact API and store the response in the Random_Cat_Facts.txt file.
