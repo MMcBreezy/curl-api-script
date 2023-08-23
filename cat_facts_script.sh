@@ -12,22 +12,24 @@ while [[ $# -gt 0 ]]; do
     key="$1"
     case $key in
         -n|--number)
-        FACTS_COUNT="$2"
-        shift
-        shift
+            FACTS_COUNT="$2"
+            shift
+            shift
         ;;
         -h|--help)
-        echo "Usage: $0 [-n|--number NUMBER] [-c|--clear] [--help]"
-        exit 0
+            echo "Usage: $0 [-n|--number NUMBER] [-c|--clear] [--help]"
+            echo " -n, --number Specify the number of cat facts to fetch and append."
+            echo " -c, --clear Clear all contents in the output file."
+            exit 0
         ;;
         -c|--clear)
-        clear_file
-        exit 0
+            clear_file
+            exit 0
         ;;
         *)
-        echo "Unknown option: $1"
-        echo "Usage: $0 [-n|--number NUMBER] [-c|--clear] [--help]"
-        exit 1
+            echo "Unknown option: $1"
+            echo "Usage: $0 [-n|--number NUMBER] [-c|--clear] [--help]"
+            exit 1
         ;;
     esac
 done
