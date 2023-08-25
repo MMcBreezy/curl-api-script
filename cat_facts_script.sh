@@ -48,5 +48,3 @@ for ((i = 0; i < FACTS_COUNT; i++)); do
 done
 
 echo "$FACTS_COUNT cat facts appended to $OUTPUT_FILE"
-
-# Running "./cat_facts_script.sh" will call the catfact API and store the response in the Random_Cat_Facts.txt file.
